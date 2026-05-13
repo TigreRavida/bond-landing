@@ -15,7 +15,6 @@
       --sage-dark: #1A2E1A;
       --sage: #4A7A4A;
       --sage-light: #E8F0E8;
-      --sage-mid: #F0F5F0;
       --sage-soft: #708070;
       --sage-border: rgba(74,122,74,0.15);
       --text: #1A2E1A;
@@ -27,340 +26,110 @@
     }
 
     html { scroll-behavior: smooth; }
-
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--white);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
 
     /* NAV */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      padding: 20px 40px;
-      display: flex; align-items: center; justify-content: space-between;
-      background: rgba(250,252,250,0.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--sage-border);
-    }
-
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px; font-weight: 400; letter-spacing: -0.02em;
-      color: var(--sage);
-    }
-
-    .nav-cta {
-      background: var(--sage-dark); color: white;
-      padding: 10px 24px; border-radius: 100px;
-      font-size: 14px; font-weight: 500; text-decoration: none;
-      transition: all 0.2s; letter-spacing: 0.01em;
-    }
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 20px 40px; display: flex; align-items: center; justify-content: space-between; background: rgba(250,252,250,0.88); backdrop-filter: blur(12px); border-bottom: 1px solid var(--sage-border); }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; letter-spacing: -0.02em; color: var(--sage); }
+    .nav-cta { background: var(--sage-dark); color: white; padding: 10px 24px; border-radius: 100px; font-size: 14px; font-weight: 500; text-decoration: none; transition: all 0.2s; }
     .nav-cta:hover { background: var(--sage); transform: translateY(-1px); }
 
     /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; padding: 120px 24px 80px;
-      position: relative; overflow: hidden;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,240,232,0.9) 0%, transparent 70%);
-      pointer-events: none;
-    }
-
-    .hero-eyebrow {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--sage);
-      margin-bottom: 24px; opacity: 0;
-      animation: fadeUp 0.8s ease 0.2s forwards;
-    }
-
-    .hero-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(56px, 10vw, 96px);
-      font-weight: 300; line-height: 0.95;
-      letter-spacing: -0.03em; color: var(--text);
-      margin-bottom: 8px; opacity: 0;
-      animation: fadeUp 0.8s ease 0.4s forwards;
-    }
+    .hero { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 120px 24px 80px; position: relative; overflow: hidden; }
+    .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(232,240,232,0.9) 0%, transparent 70%); pointer-events: none; }
+    .hero-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); margin-bottom: 24px; opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards; }
+    .hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(56px, 10vw, 96px); font-weight: 300; line-height: 0.95; letter-spacing: -0.03em; color: var(--text); margin-bottom: 8px; opacity: 0; animation: fadeUp 0.8s ease 0.4s forwards; }
     .hero-title em { font-style: italic; color: var(--sage); }
-
-    .hero-subtitle {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(20px, 3vw, 28px);
-      font-weight: 300; font-style: italic;
-      color: var(--text-soft); margin-top: 20px; margin-bottom: 48px;
-      max-width: 480px; line-height: 1.5; opacity: 0;
-      animation: fadeUp 0.8s ease 0.6s forwards;
-    }
-
-    .hero-cta-group {
-      display: flex; flex-direction: column; align-items: center; gap: 14px;
-      opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards;
-    }
-
-    .btn-primary {
-      background: var(--sage-dark); color: white;
-      padding: 16px 40px; border-radius: 100px;
-      font-size: 15px; font-weight: 500; text-decoration: none;
-      transition: all 0.25s; display: inline-block;
-      box-shadow: 0 4px 24px rgba(26,46,26,0.25);
-    }
-    .btn-primary:hover {
-      background: var(--sage); transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(74,122,74,0.35);
-    }
-
-    .btn-ghost {
-      color: var(--text-soft); font-size: 13px; text-decoration: none;
-      border-bottom: 1px solid rgba(74,122,74,0.3); padding-bottom: 2px;
-      transition: all 0.2s;
-    }
+    .hero-subtitle { font-family: 'Cormorant Garamond', serif; font-size: clamp(20px, 3vw, 28px); font-weight: 300; font-style: italic; color: var(--text-soft); margin-top: 20px; margin-bottom: 48px; max-width: 480px; line-height: 1.5; opacity: 0; animation: fadeUp 0.8s ease 0.6s forwards; }
+    .hero-cta-group { display: flex; flex-direction: column; align-items: center; gap: 14px; opacity: 0; animation: fadeUp 0.8s ease 0.8s forwards; }
+    .btn-primary { background: var(--sage-dark); color: white; padding: 16px 40px; border-radius: 100px; font-size: 15px; font-weight: 500; text-decoration: none; transition: all 0.25s; display: inline-block; box-shadow: 0 4px 24px rgba(26,46,26,0.25); }
+    .btn-primary:hover { background: var(--sage); transform: translateY(-2px); box-shadow: 0 8px 32px rgba(74,122,74,0.35); }
+    .btn-ghost { color: var(--text-soft); font-size: 13px; text-decoration: none; border-bottom: 1px solid rgba(74,122,74,0.3); padding-bottom: 2px; transition: all 0.2s; }
     .btn-ghost:hover { color: var(--sage); border-color: var(--sage); }
 
-    /* PHONE MOCKUP */
-    .phone-wrapper {
-      margin: 80px auto 0; max-width: 280px; opacity: 0;
-      animation: fadeUp 1s ease 1s forwards;
-    }
-
-    .phone-frame {
-      background: white; border-radius: 36px;
-      box-shadow: 0 32px 80px rgba(26,46,26,0.15), 0 0 0 1px var(--sage-border);
-      overflow: hidden;
-    }
-
-    .phone-screen {
-      background: linear-gradient(160deg, #E8F0E8 0%, #D8EBD8 100%);
-      padding: 28px 20px 24px;
-    }
-
-    .phone-header {
-      display: flex; justify-content: space-between; align-items: flex-start;
-      margin-bottom: 20px;
-    }
-
+    /* PHONE */
+    .phone-wrapper { margin: 80px auto 0; max-width: 280px; opacity: 0; animation: fadeUp 1s ease 1s forwards; }
+    .phone-frame { background: white; border-radius: 36px; box-shadow: 0 32px 80px rgba(26,46,26,0.15), 0 0 0 1px var(--sage-border); overflow: hidden; }
+    .phone-screen { background: linear-gradient(160deg, #E8F0E8 0%, #D8EBD8 100%); padding: 28px 20px 24px; }
+    .phone-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
     .phone-greeting { font-size: 11px; color: var(--sage-soft); font-weight: 500; }
     .phone-date { font-size: 16px; font-weight: 700; color: var(--sage-dark); margin-top: 2px; }
-    .phone-pill {
-      background: rgba(74,122,74,0.15); color: var(--sage-dark);
-      font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 20px;
-    }
-
-    .phone-card {
-      background: white; border-radius: 18px; padding: 18px;
-      box-shadow: 0 2px 16px rgba(74,122,74,0.1);
-    }
-
-    .phone-card-label {
-      font-size: 9px; font-weight: 700; color: var(--sage);
-      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px;
-    }
-
-    /* Pregunta en cursiva estilo app */
-    .phone-card-text {
-      font-size: 13px; font-style: italic; color: var(--sage-dark);
-      line-height: 1.5; margin-bottom: 14px;
-    }
-
-    /* Respuesta en DM Sans normal */
-    .phone-input-area {
-      border-top: 1px solid var(--sage-border); padding-top: 12px;
-      font-size: 13px; color: var(--sage-soft); line-height: 1.6;
-    }
-
-    .phone-btn {
-      background: var(--sage-dark); color: white;
-      border-radius: 100px; padding: 10px 0; width: 100%;
-      text-align: center; font-size: 12px; font-weight: 500; margin-top: 14px;
-    }
+    .phone-pill { background: rgba(74,122,74,0.15); color: var(--sage-dark); font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+    .phone-card { background: white; border-radius: 18px; padding: 18px; box-shadow: 0 2px 16px rgba(74,122,74,0.1); }
+    .phone-card-label { font-size: 9px; font-weight: 700; color: var(--sage); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 10px; }
+    .phone-card-text { font-size: 13px; font-style: italic; color: var(--sage-dark); line-height: 1.5; margin-bottom: 14px; }
+    .phone-input-area { border-top: 1px solid var(--sage-border); padding-top: 12px; font-size: 13px; color: var(--sage-soft); line-height: 1.6; }
+    .phone-btn { background: var(--sage-dark); color: white; border-radius: 100px; padding: 10px 0; width: 100%; text-align: center; font-size: 12px; font-weight: 500; margin-top: 14px; }
 
     /* DIVIDER */
-    .divider {
-      display: flex; align-items: center; gap: 16px;
-      max-width: 200px; margin: 80px auto;
-    }
+    .divider { display: flex; align-items: center; gap: 16px; max-width: 200px; margin: 80px auto; }
     .divider-line { flex: 1; height: 1px; background: var(--sage-border); }
     .divider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--sage); opacity: 0.4; }
 
     /* FEATURES */
-    .features {
-      padding: 0 24px 100px; max-width: 900px; margin: 0 auto;
-    }
-
-    .features-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(36px, 6vw, 56px); font-weight: 300;
-      text-align: center; line-height: 1.1; margin-bottom: 64px; color: var(--text);
-    }
+    .features { padding: 0 24px 100px; max-width: 900px; margin: 0 auto; }
+    .features-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 6vw, 56px); font-weight: 300; text-align: center; line-height: 1.1; margin-bottom: 64px; color: var(--text); }
     .features-title em { font-style: italic; color: var(--sage); }
-
-    /* Grid fijo 2x2 */
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 24px;
-    }
-
-    .feature-card {
-      background: var(--blush); border-radius: 24px; padding: 32px;
-      border: 1px solid var(--sage-border);
-      transition: transform 0.25s, box-shadow 0.25s;
-    }
-    .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 40px rgba(74,122,74,0.12);
-    }
-
+    .features-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .feature-card { background: var(--blush); border-radius: 24px; padding: 32px; border: 1px solid var(--sage-border); transition: transform 0.25s, box-shadow 0.25s; }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(74,122,74,0.12); }
     .feature-icon { font-size: 32px; margin-bottom: 16px; display: block; }
-
-    .feature-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-weight: 400; margin-bottom: 10px; color: var(--text);
-    }
-
+    .feature-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; margin-bottom: 10px; color: var(--text); }
     .feature-desc { font-size: 14px; color: var(--text-soft); line-height: 1.65; }
 
+    /* VIDEOS */
+    .videos-section { padding: 80px 0; overflow: hidden; }
+    .videos-header { text-align: center; margin-bottom: 48px; padding: 0 24px; }
+    .videos-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px; }
+    .videos-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 6vw, 56px); font-weight: 300; color: var(--text); line-height: 1.1; }
+    .videos-title em { font-style: italic; color: var(--sage); }
+    .videos-scroll { display: flex; gap: 16px; overflow-x: auto; padding: 0 24px 16px; scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: touch; }
+    .videos-scroll::-webkit-scrollbar { display: none; }
+    .videos-scroll video { height: 480px; width: auto; border-radius: 20px; flex-shrink: 0; object-fit: cover; background: var(--blush); }
+
     /* QUOTE */
-    .quote-section {
-      padding: 80px 24px; text-align: center;
-      background: linear-gradient(160deg, var(--blush) 0%, var(--petal) 100%);
-    }
-
-    .quote-text {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(24px, 4vw, 40px); font-weight: 300; font-style: italic;
-      color: var(--text); max-width: 600px; margin: 0 auto 24px; line-height: 1.4;
-    }
-
+    .quote-section { padding: 80px 24px; text-align: center; background: linear-gradient(160deg, var(--blush) 0%, var(--petal) 100%); }
+    .quote-text { font-family: 'Cormorant Garamond', serif; font-size: clamp(24px, 4vw, 40px); font-weight: 300; font-style: italic; color: var(--text); max-width: 600px; margin: 0 auto 24px; line-height: 1.4; }
     .quote-author { font-size: 13px; color: var(--text-hint); letter-spacing: 0.05em; }
 
     /* TESTERS */
-    .testers-section {
-      padding: 100px 24px; max-width: 680px; margin: 0 auto; text-align: center;
-    }
-
-    .testers-eyebrow {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--sage); margin-bottom: 20px;
-    }
-
-    .testers-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(36px, 6vw, 56px); font-weight: 300;
-      line-height: 1.1; margin-bottom: 20px; color: var(--text);
-    }
+    .testers-section { padding: 100px 24px; max-width: 680px; margin: 0 auto; text-align: center; }
+    .testers-eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); margin-bottom: 20px; }
+    .testers-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 6vw, 56px); font-weight: 300; line-height: 1.1; margin-bottom: 20px; color: var(--text); }
     .testers-title em { font-style: italic; color: var(--sage); }
-
-    .testers-sub {
-      font-size: 16px; color: var(--text-soft); margin-bottom: 48px;
-      font-family: 'Cormorant Garamond', serif; font-style: italic; line-height: 1.6;
-    }
-
-    .testers-benefits {
-      display: flex; flex-direction: column; gap: 12px;
-      margin-bottom: 48px; text-align: left;
-    }
-
-    .tester-benefit {
-      display: flex; align-items: center; gap: 14px;
-      background: var(--blush); border-radius: 14px; padding: 14px 18px;
-      border: 1px solid var(--sage-border);
-    }
-
-    .tester-benefit-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      background: var(--sage); flex-shrink: 0;
-    }
-
+    .testers-sub { font-size: 16px; color: var(--text-soft); margin-bottom: 48px; font-family: 'Cormorant Garamond', serif; font-style: italic; line-height: 1.6; }
+    .testers-benefits { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; text-align: left; }
+    .tester-benefit { display: flex; align-items: center; gap: 14px; background: var(--blush); border-radius: 14px; padding: 14px 18px; border: 1px solid var(--sage-border); }
+    .tester-benefit-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--sage); flex-shrink: 0; }
     .tester-benefit-text { font-size: 14px; font-weight: 500; color: var(--text); }
-
-    .testers-cta {
-      background: var(--sage-dark); color: white;
-      padding: 18px 48px; border-radius: 100px;
-      font-size: 16px; font-weight: 500; text-decoration: none;
-      transition: all 0.25s; display: inline-block;
-      box-shadow: 0 4px 24px rgba(26,46,26,0.25);
-    }
-    .testers-cta:hover {
-      background: var(--sage); transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(74,122,74,0.35);
-    }
-
+    .testers-cta { background: var(--sage-dark); color: white; padding: 18px 48px; border-radius: 100px; font-size: 16px; font-weight: 500; text-decoration: none; transition: all 0.25s; display: inline-block; box-shadow: 0 4px 24px rgba(26,46,26,0.25); }
+    .testers-cta:hover { background: var(--sage); transform: translateY(-2px); }
     .testers-note { font-size: 12px; color: var(--text-hint); margin-top: 12px; }
-
-    .testers-install {
-      margin-top: 28px; padding: 16px 20px;
-      background: white; border-radius: 14px; border: 1px solid var(--sage-border);
-      font-size: 13px; color: var(--text-soft); line-height: 1.7; text-align: left;
-    }
+    .testers-install { margin-top: 28px; padding: 16px 20px; background: white; border-radius: 14px; border: 1px solid var(--sage-border); font-size: 13px; color: var(--text-soft); line-height: 1.7; text-align: left; }
     .testers-install strong { color: var(--sage-dark); }
 
     /* CTA FINAL */
-    .cta-section {
-      padding: 100px 24px; text-align: center;
-      background: var(--sage-dark);
-    }
-
-    .cta-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(40px, 7vw, 72px); font-weight: 300;
-      line-height: 1.05; margin-bottom: 20px; color: white;
-    }
+    .cta-section { padding: 100px 24px; text-align: center; background: var(--sage-dark); }
+    .cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 7vw, 72px); font-weight: 300; line-height: 1.05; margin-bottom: 20px; color: white; }
     .cta-title em { font-style: italic; color: rgba(232,240,232,0.8); }
-
-    .cta-sub {
-      font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 48px;
-      font-family: 'Cormorant Garamond', serif; font-style: italic;
-    }
-
-    .store-badges {
-      display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 20px;
-    }
-
-    .store-badge {
-      background: rgba(255,255,255,0.1); color: white;
-      padding: 14px 24px; border-radius: 14px;
-      text-decoration: none; display: flex; align-items: center; gap: 10px;
-      font-size: 13px; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.15);
-    }
+    .cta-sub { font-size: 16px; color: rgba(255,255,255,0.6); margin-bottom: 48px; font-family: 'Cormorant Garamond', serif; font-style: italic; }
+    .store-badges { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+    .store-badge { background: rgba(255,255,255,0.1); color: white; padding: 14px 24px; border-radius: 14px; text-decoration: none; display: flex; align-items: center; gap: 10px; font-size: 13px; transition: all 0.2s; border: 1px solid rgba(255,255,255,0.15); }
     .store-badge:hover { background: rgba(255,255,255,0.18); transform: translateY(-2px); }
     .store-badge svg { width: 22px; height: 22px; }
     .store-badge-sub { font-size: 10px; opacity: 0.6; display: block; }
     .store-badge-name { font-size: 15px; font-weight: 600; display: block; }
-
     .coming-soon { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 16px; }
     .coming-soon a { color: rgba(232,240,232,0.9); text-decoration: none; font-weight: 500; }
 
     /* FOOTER */
-    footer {
-      padding: 40px 24px; border-top: 1px solid var(--sage-border);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 16px; max-width: 900px; margin: 0 auto;
-    }
-
-    .footer-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; color: var(--sage); font-weight: 400;
-    }
-
+    footer { padding: 40px 24px; border-top: 1px solid var(--sage-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; max-width: 900px; margin: 0 auto; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; color: var(--sage); font-weight: 400; }
     .footer-links { display: flex; gap: 24px; }
-
-    .footer-links a {
-      font-size: 13px; color: var(--text-hint); text-decoration: none; transition: color 0.2s;
-    }
+    .footer-links a { font-size: 13px; color: var(--text-hint); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--sage); }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
     @media (max-width: 600px) {
       nav { padding: 16px 20px; }
@@ -371,6 +140,7 @@
       footer { flex-direction: column; text-align: center; }
       .footer-links { justify-content: center; }
       .store-badges { flex-direction: column; align-items: center; }
+      .videos-scroll video { height: 360px; }
     }
   </style>
 </head>
@@ -442,6 +212,21 @@
     </div>
   </section>
 
+  <!-- VIDEOS -->
+  <section class="videos-section">
+    <div class="videos-header">
+      <p class="videos-eyebrow">Momentos reales</p>
+      <h2 class="videos-title">Lo que ninguna foto<br><em>puede capturar</em></h2>
+    </div>
+    <div class="videos-scroll">
+      <video autoplay muted loop playsinline src="videos/video1.mp4"></video>
+      <video autoplay muted loop playsinline src="videos/video2.mp4"></video>
+      <video autoplay muted loop playsinline src="videos/video3.mp4"></video>
+      <video autoplay muted loop playsinline src="videos/video4.mp4"></video>
+      <video autoplay muted loop playsinline src="videos/video5.mp4"></video>
+    </div>
+  </section>
+
   <section class="quote-section">
     <p class="quote-text">"Cada palabra que escribís ya es parte de su historia."</p>
     <p class="quote-author">— Bond</p>
@@ -451,29 +236,14 @@
     <p class="testers-eyebrow">Acceso anticipado</p>
     <h2 class="testers-title">Probá Bond<br><em>antes</em> del lanzamiento</h2>
     <p class="testers-sub">Buscamos mamás y futuras mamás que quieran probar Bond gratis y darnos su feedback. A cambio, acceso Premium completo sin costo.</p>
-
     <div class="testers-benefits">
-      <div class="tester-benefit">
-        <div class="tester-benefit-dot"></div>
-        <div class="tester-benefit-text">Acceso Premium completo — gratis para siempre</div>
-      </div>
-      <div class="tester-benefit">
-        <div class="tester-benefit-dot"></div>
-        <div class="tester-benefit-text">Sin App Store — se instala directo desde el celular</div>
-      </div>
-      <div class="tester-benefit">
-        <div class="tester-benefit-dot"></div>
-        <div class="tester-benefit-text">iOS y Android — cualquier celular</div>
-      </div>
-      <div class="tester-benefit">
-        <div class="tester-benefit-dot"></div>
-        <div class="tester-benefit-text">Tu feedback da forma a la versión final</div>
-      </div>
+      <div class="tester-benefit"><div class="tester-benefit-dot"></div><div class="tester-benefit-text">Acceso Premium completo — gratis para siempre</div></div>
+      <div class="tester-benefit"><div class="tester-benefit-dot"></div><div class="tester-benefit-text">Sin App Store — se instala directo desde el celular</div></div>
+      <div class="tester-benefit"><div class="tester-benefit-dot"></div><div class="tester-benefit-text">iOS y Android — cualquier celular</div></div>
+      <div class="tester-benefit"><div class="tester-benefit-dot"></div><div class="tester-benefit-text">Tu feedback da forma a la versión final</div></div>
     </div>
-
     <a href="https://bond-six.vercel.app" class="testers-cta">Quiero probar Bond 🌿</a>
     <p class="testers-note">Gratis · Sin tarjeta · Sin App Store</p>
-
     <div class="testers-install">
       <strong>¿Cómo se instala?</strong><br>
       Abrí el link desde <strong>Safari</strong> (iPhone) o <strong>Chrome</strong> (Android) → tocá <strong>"Agregar a pantalla de inicio"</strong> → listo. Queda como una app nativa en tu cel, sin descargar nada.
@@ -486,17 +256,11 @@
     <div class="store-badges">
       <a href="https://bond-six.vercel.app" class="store-badge">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-        <div>
-          <span class="store-badge-sub">Próximamente en</span>
-          <span class="store-badge-name">App Store</span>
-        </div>
+        <div><span class="store-badge-sub">Próximamente en</span><span class="store-badge-name">App Store</span></div>
       </a>
       <a href="https://bond-six.vercel.app" class="store-badge">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3.18 23.76c.3.17.64.22.99.14l12.2-7.03-2.85-2.85-10.34 9.74zm-1.81-20.1C1.13 3.99 1 4.4 1 4.86v14.28c0 .46.13.87.37 1.2l.07.06 8-8v-.19L1.44 3.6l-.07.06zm19.43 8.79L18.16 10l-3.12 3.12 3.12 3.12 2.66-1.53c.76-.44.76-1.15-.02-1.59v.03zM4.17.28L16.37 7.3l-2.85 2.85L3.18.41C3.48.24 3.87.19 4.17.28z"/></svg>
-        <div>
-          <span class="store-badge-sub">Próximamente en</span>
-          <span class="store-badge-name">Google Play</span>
-        </div>
+        <div><span class="store-badge-sub">Próximamente en</span><span class="store-badge-name">Google Play</span></div>
       </a>
     </div>
     <p class="coming-soon">Mientras tanto, abrí Bond desde tu navegador → <a href="https://bond-six.vercel.app">bond-six.vercel.app</a></p>
