@@ -248,10 +248,35 @@
 </div>
 
 <script>
+
 const SUPABASE_URL = 'https://hlthxgoogcizovnauclr.supabase.co'
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhsdGh4Z29vZ2Npem92bmF1Y2xyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2MDA1ODksImV4cCI6MjA2MTE3NjU4OX0.RUn4GHKMqiGMqFJQ2OQJRXnKqGolsTKi6ZJlxKfluFc'
-const { createClient } = supabase
-const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+async function fetchSupabase(table, params) {
+  const url = new URL(`${SUPABASE_URL}/rest/v1/${table}`)
+  Object.entries(params).forEach(([k, v]) => url.searchParams.set(k, v))
+  const r = await fetch(url, {
+    headers: {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json'
+    }
+  })
+  return r.json()
+}
+
+async function rpcSupabase(fn, params) {
+  const r = await fetch(`${SUPABASE_URL}/rest/v1/rpc/${fn}`, {
+    method: 'POST',
+    headers: {
+      'apikey': SUPABASE_ANON_KEY,
+      'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(params)
+  })
+  return r.json()
+}
 
 const nivelInfo = {
   seguidor: { label: 'Seguidor', desc: 'Podrás ver las respuestas escritas', icon: '🌿' },
@@ -266,52 +291,49 @@ const codigo = pathParts[pathParts.length - 1]
 let invitacionData = null
 let emailEnviado = false
 
-async function init() {
-  if (!codigo) {
-    mostrarError('Link inválido')
-    return
-  }
-
-  // Verificar si ya hay sesión activa
-  const { data: { session } } = await db.auth.getSession()
-
-  // Buscar la invitación
-  const { data: contacto, error } = await db
-    .from('contactos_especiales')
-    .select('*')
-    .eq('codigo_invitacion', codigo)
-    .eq('activo', true)
-    .maybeSingle()
-  
-  if (error || !contacto) {
-    mostrarError('Este link de invitación no es válido o ya expiró.')
-    return
-  }
-  
-  // Buscar nombre de la propietaria por separado
-  const { data: perfilData } = await db
-    .from('perfiles')
-    .select('nombre')
-    .eq('id', contacto.propietaria_id)
-    .maybeSingle()
-  
-  invitacionData = contacto
-  const nombreMama = perfilData?.nombre || 'alguien especial'
-
-  if (session?.user) {
-    // Ya logueado — aceptar invitación directamente
-    await aceptarYRedirigir(session.user)
-  } else {
-    // Mostrar pantalla de invitación
-    mostrarInvitacion(nombreMama, contacto.nivel, contacto.nombre_relacion)
-  }
-
-  // Escuchar cambios de auth (cuando regresa del magic link o Google)
-  db.auth.onAuthStateChange(async (_event, session) => {
-    if (session?.user) {
-      await aceptarYRedirigir(session.user)
-    }
+async function loginGoogle() {
+  const { error } = await window._db.auth.signInWithOAuth({
+    provider: 'google',
+    options: { redirectTo: window.location.href }
   })
+  if (error) mostrarError(error.message)
+}
+
+async function loginEmail() {
+  const email = document.getElementById('email-input')?.value?.trim()
+  if (!email) return
+  const errorEl = document.getElementById('email-error')
+  errorEl.style.display = 'none'
+  const { error } = await window._db.auth.signInWithOtp({
+    email,
+    options: { emailRedirectTo: window.location.href }
+  })
+  if (error) {
+    errorEl.textContent = 'No se pudo enviar el email. Intentá de nuevo.'
+    errorEl.style.display = 'block'
+    return
+  }
+  document.getElementById('email-mostrado').textContent = email
+  document.getElementById('email-form').style.display = 'none'
+  document.getElementById('email-enviado').style.display = 'block'
+}
+
+async function aceptarYRedirigir(user) {
+  mostrarCargando('Aceptando invitación...')
+  try {
+    const data = await rpcSupabase('aceptar_invitacion', { p_codigo: codigo })
+    if (data?.error) {
+      mostrarError(data.error)
+      return
+    }
+    localStorage.setItem('bond_invitado_codigo', codigo)
+    localStorage.setItem('bond_invitado_propietaria', data.propietaria_id)
+    localStorage.setItem('bond_invitado_nivel', data.nivel)
+    mostrarExito(data)
+    setTimeout(() => { window.location.href = 'https://app.joinbondapp.com' }, 2000)
+  } catch (e) {
+    mostrarError('Ocurrió un error. Intentá de nuevo.')
+  }
 }
 
 function mostrarInvitacion(nombreMama, nivel, nombreRelacion) {
