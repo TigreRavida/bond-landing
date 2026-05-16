@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bond — Invitación</title>
+  <meta name="description" content="Te invitaron a seguir un embarazo en Bond">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sage-dark: #1A2E1A;
+      --sage: #4A7A4A;
+      --sage-light: #E8F0E8;
+      --sage-border: rgba(74,122,74,0.15);
+      --text: #1A2E1A;
+      --text-soft: #3A5A3A;
+      --text-hint: #708070;
+      --white: #FAFCFA;
+      --blush: #E8F0E8;
+    }
+    html, body { height: 100%; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--sage);
+      letter-spacing: -0.02em;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .card {
+      background: white;
+      border-radius: 24px;
+      padding: 32px 28px;
+      border: 1px solid var(--sage-border);
+      box-shadow: 0 4px 32px rgba(26,46,26,0.08);
+    }
+
+    .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--sage);
+      color: white;
+      font-size: 26px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .invite-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px;
+      font-weight: 300;
+      text-align: center;
+      line-height: 1.3;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .invite-title em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    .invite-sub {
+      font-size: 14px;
+      color: var(--text-hint);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .nivel-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--blush);
+      border: 1px solid var(--sage-border);
+      border-radius: 100px;
+      padding: 6px 14px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--sage);
+      margin: 0 auto 28px;
+      display: flex;
+      width: fit-content;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    .divider-line { flex: 1; height: 1px; background: var(--sage-border); }
+    .divider-text { font-size: 12px; color: var(--text-hint); }
+
+    .btn-google {
+      width: 100%;
+      padding: 14px 20px;
+      border: 1.5px solid var(--sage-border);
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      background: white;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: all 0.2s;
+      margin-bottom: 12px;
+    }
+    .btn-google:hover { background: var(--blush); }
+
+    .btn-primary {
+      width: 100%;
+      padding: 14px 20px;
+      border: none;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--sage-dark);
+      color: white;
+      transition: all 0.2s;
+    }
+    .btn-primary:hover { background: var(--sage); }
+    .btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid var(--sage-border);
+      border-radius: 12px;
+      font-size: 14px;
+      font-family: 'DM Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      margin-bottom: 12px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .input:focus { border-color: var(--sage); }
+
+    .estado {
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    .estado-icon { font-size: 48px; margin-bottom: 16px; }
+
+    .estado-titulo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .estado-sub {
+      font-size: 13px;
+      color: var(--text-hint);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .error-msg {
+      background: #FEF0EF;
+      border: 1px solid rgba(220,38,38,0.2);
+      border-radius: 10px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: #DC2626;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px 0;
+      color: var(--text-hint);
+      font-size: 14px;
+    }
+
+    .loading-dot {
+      display: inline-block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--sage);
+      margin: 0 2px;
+      animation: bounce 1.2s infinite;
+    }
+    .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+    .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes bounce {
+      0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+      40% { transform: scale(1); opacity: 1; }
+    }
+
+    .nota { font-size: 11px; color: var(--text-hint); text-align: center; margin-top: 16px; line-height: 1.5; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="logo">Bond</div>
+  <div class="card" id="card">
+    <div class="loading">
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+      <span class="loading-dot"></span>
+    </div>
+  </div>
+</div>
+
+<script>
+const SUPABASE_URL = 'https://hlthxgoogcizovnauclr.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhsdGh4Z29vZ2Npem92bmF1Y2xyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDU2MDA1ODksImV4cCI6MjA2MTE3NjU4OX0.RUn4GHKMqiGMqFJQ2OQJRXnKqGolsTKi6ZJlxKfluFc'
+const { createClient } = supabase
+const db = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+const nivelInfo = {
+  seguidor: { label: 'Seguidor', desc: 'Podrás ver las respuestas escritas', icon: '🌿' },
+  cercano:  { label: 'Cercano',  desc: 'Podrás ver respuestas y fotos',     icon: '📷' },
+  intimo:   { label: 'Íntimo',   desc: 'Podrás ver todo y escribirle',      icon: '💬' },
+}
+
+// Obtener código de la URL: /join/CODIGO
+const pathParts = window.location.pathname.split('/')
+const codigo = pathParts[pathParts.length - 1]
+
+let invitacionData = null
+let emailEnviado = false
+
+async function init() {
+  if (!codigo) {
+    mostrarError('Link inválido')
+    return
+  }
+
+  // Verificar si ya hay sesión activa
+  const { data: { session } } = await db.auth.getSession()
+
+  // Buscar la invitación
+  const { data: contacto, error } = await db
+    .from('contactos_especiales')
+    .select('*, perfiles!propietaria_id(nombre)')
+    .eq('codigo_invitacion', codigo)
+    .eq('activo', true)
+    .maybeSingle()
+
+  if (error || !contacto) {
+    mostrarError('Este link de invitación no es válido o ya expiró.')
+    return
+  }
+
+  invitacionData = contacto
+  const nombreMama = contacto.perfiles?.nombre || 'alguien especial'
+
+  if (session?.user) {
+    // Ya logueado — aceptar invitación directamente
+    await aceptarYRedirigir(session.user)
+  } else {
+    // Mostrar pantalla de invitación
+    mostrarInvitacion(nombreMama, contacto.nivel, contacto.nombre_relacion)
+  }
+
+  // Escuchar cambios de auth (cuando regresa del magic link o Google)
+  db.auth.onAuthStateChange(async (_event, session) => {
+    if (session?.user) {
+      await aceptarYRedirigir(session.user)
+    }
+  })
+}
+
+function mostrarInvitacion(nombreMama, nivel, nombreRelacion) {
+  const info = nivelInfo[nivel] || nivelInfo.seguidor
+  const inicial = nombreMama[0]?.toUpperCase() || 'B'
+
+  document.getElementById('card').innerHTML = `
+    <div class="avatar">${inicial}</div>
+    <h1 class="invite-title">
+      <em>${nombreMama}</em><br>te invitó a su diario
+    </h1>
+    <p class="invite-sub">
+      Durante su embarazo, podrás acompañarla y ver sus momentos especiales en Bond.
+    </p>
+    <div class="nivel-badge">
+      ${info.icon} ${info.label} — ${info.desc}
+    </div>
+
+    <button class="btn-google" onclick="loginGoogle()">
+      <svg width="18" height="18" viewBox="0 0 24 24">
+        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+      </svg>
+      Continuar con Google
+    </button>
+
+    <div class="divider">
+      <div class="divider-line"></div>
+      <span class="divider-text">o</span>
+      <div class="divider-line"></div>
+    </div>
+
+    <div id="email-form">
+      <input class="input" type="email" id="email-input" placeholder="tu@email.com" />
+      <div id="email-error" style="display:none" class="error-msg"></div>
+      <button class="btn-primary" onclick="loginEmail()">Entrar con email</button>
+    </div>
+
+    <div id="email-enviado" style="display:none; text-align:center; padding: 20px 0;">
+      <div style="font-size:40px; margin-bottom:14px;">📬</div>
+      <p style="font-size:15px; font-weight:600; margin-bottom:8px;">¡Revisá tu email!</p>
+      <p style="font-size:13px; color:var(--text-hint); line-height:1.6;">
+        Te mandamos un link a <strong id="email-mostrado"></strong>.<br>
+        Tocalo para aceptar la invitación.
+      </p>
+      <p style="font-size:11px; color:var(--text-hint); margin-top:12px;">
+        ¿No llegó? Revisá spam o correo no deseado.
+      </p>
+    </div>
+
+    <p class="nota">Al entrar aceptás los <a href="https://joinbondapp.com/terminos.html" style="color:var(--sage);">términos de uso</a> de Bond.</p>
+  `
+}
+
+async function loginGoogle() {
+  const { error } = await db.auth.signInWithOAuth({
+    provider: 'google',
+    options: {
+      redirectTo: window.location.href // vuelve a la misma página con el código
+    }
+  })
+  if (error) mostrarError(error.message)
+}
+
+async function loginEmail() {
+  const email = document.getElementById('email-input')?.value?.trim()
+  if (!email) return
+
+  const errorEl = document.getElementById('email-error')
+  errorEl.style.display = 'none'
+
+  const { error } = await db.auth.signInWithOtp({
+    email,
+    options: {
+      emailRedirectTo: window.location.href
+    }
+  })
+
+  if (error) {
+    errorEl.textContent = 'No se pudo enviar el email. Intentá de nuevo.'
+    errorEl.style.display = 'block'
+    return
+  }
+
+  document.getElementById('email-mostrado').textContent = email
+  document.getElementById('email-form').style.display = 'none'
+  document.getElementById('email-enviado').style.display = 'block'
+}
+
+async function aceptarYRedirigir(user) {
+  mostrarCargando('Aceptando invitación...')
+
+  try {
+    const { data, error } = await db.rpc('aceptar_invitacion', {
+      p_codigo: codigo
+    })
+
+    if (error || data?.error) {
+      mostrarError(data?.error || 'No se pudo aceptar la invitación.')
+      return
+    }
+
+    // Guardar en localStorage que este user es invitado con este código
+    localStorage.setItem('bond_invitado_codigo', codigo)
+    localStorage.setItem('bond_invitado_propietaria', data.propietaria_id)
+    localStorage.setItem('bond_invitado_nivel', data.nivel)
+
+    mostrarExito(data)
+
+    // Redirigir a la app después de 2 segundos
+    setTimeout(() => {
+      window.location.href = 'https://app.joinbondapp.com'
+    }, 2000)
+
+  } catch (e) {
+    mostrarError('Ocurrió un error. Intentá de nuevo.')
+  }
+}
+
+function mostrarCargando(texto) {
+  document.getElementById('card').innerHTML = `
+    <div class="estado">
+      <div class="loading-dot" style="width:10px;height:10px;"></div>
+      <p style="margin-top:16px; color:var(--text-hint); font-size:14px;">${texto}</p>
+    </div>
+  `
+}
+
+function mostrarExito(data) {
+  document.getElementById('card').innerHTML = `
+    <div class="estado">
+      <div class="estado-icon">🌿</div>
+      <h2 class="estado-titulo">¡Invitación aceptada!</h2>
+      <p class="estado-sub">
+        Ya podés ver el diario del embarazo.<br>
+        Te estamos llevando a Bond...
+      </p>
+      <div style="height:3px; background:var(--sage-border); border-radius:2px; overflow:hidden;">
+        <div style="height:100%; background:var(--sage); border-radius:2px; animation:progreso 2s ease-in-out forwards;"></div>
+      </div>
+    </div>
+    <style>@keyframes progreso { 0%{width:0%} 100%{width:100%} }</style>
+  `
+}
+
+function mostrarError(msg) {
+  document.getElementById('card').innerHTML = `
+    <div class="estado">
+      <div class="estado-icon">🍂</div>
+      <h2 class="estado-titulo">Link no válido</h2>
+      <p class="estado-sub">${msg}</p>
+      <a href="https://joinbondapp.com" style="color:var(--sage); font-size:13px;">
+        Ir a joinbondapp.com
+      </a>
+    </div>
+  `
+}
+
+init()
+</script>
+</body>
+</html>
