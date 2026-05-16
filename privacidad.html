@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bond — Política de privacidad</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --sage-dark: #1A2E1A; --sage: #4A7A4A; --sage-border: rgba(74,122,74,0.15);
+      --text: #1A2E1A; --text-soft: #3A5A3A; --text-hint: #708070; --white: #FAFCFA;
+    }
+    body { font-family: 'DM Sans', sans-serif; background: var(--white); color: var(--text); line-height: 1.7; }
+    nav { padding: 20px 40px; border-bottom: 1px solid var(--sage-border); display: flex; align-items: center; justify-content: space-between; background: var(--white); position: sticky; top: 0; z-index: 10; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 24px; color: var(--sage); text-decoration: none; }
+    .nav-back { font-size: 13px; color: var(--text-hint); text-decoration: none; }
+    .nav-back:hover { color: var(--sage); }
+    main { max-width: 720px; margin: 0 auto; padding: 60px 32px 100px; }
+    .eyebrow { font-size: 11px; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--sage); margin-bottom: 16px; }
+    h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 52px); font-weight: 300; line-height: 1.1; color: var(--text); margin-bottom: 12px; }
+    .fecha { font-size: 13px; color: var(--text-hint); margin-bottom: 48px; padding-bottom: 32px; border-bottom: 1px solid var(--sage-border); }
+    h2 { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--text); margin: 40px 0 12px; }
+    p { font-size: 15px; color: var(--text-soft); margin-bottom: 16px; }
+    ul { margin: 0 0 16px 20px; }
+    li { font-size: 15px; color: var(--text-soft); margin-bottom: 8px; }
+    a { color: var(--sage); }
+    .destacado { background: #E8F0E8; border-left: 3px solid var(--sage); border-radius: 0 10px 10px 0; padding: 16px 20px; margin-bottom: 24px; }
+    .destacado p { margin: 0; font-size: 14px; }
+    footer { border-top: 1px solid var(--sage-border); padding: 32px; text-align: center; font-size: 12px; color: var(--text-hint); }
+    @media (max-width: 600px) { nav { padding: 16px 20px; } main { padding: 40px 20px 80px; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="https://joinbondapp.com" class="nav-logo">Bond</a>
+  <a href="https://joinbondapp.com" class="nav-back">← Volver</a>
+</nav>
+
+<main>
+  <p class="eyebrow">Legal</p>
+  <h1>Política de privacidad</h1>
+  <p class="fecha">Última actualización: mayo de 2026</p>
+
+  <div class="destacado">
+    <p>En Bond, tu privacidad no es una formalidad — es parte de lo que somos. Tu diario es tuyo. Nunca vendemos tus datos. Nunca los usamos para publicidad. Este documento explica exactamente qué guardamos y por qué.</p>
+  </div>
+
+  <h2>1. Quiénes somos</h2>
+  <p>Bond es una aplicación de diario emocional para el embarazo. Podés contactarnos en <a href="mailto:hello@joinbondapp.com">hello@joinbondapp.com</a>.</p>
+
+  <h2>2. Qué información recopilamos</h2>
+  <p>Recopilamos únicamente la información necesaria para que Bond funcione:</p>
+  <ul>
+    <li><strong>Datos de cuenta:</strong> tu email, nombre y fecha probable de parto.</li>
+    <li><strong>Contenido del diario:</strong> textos, audios, fotos y videos que subís voluntariamente.</li>
+    <li><strong>Datos de uso:</strong> racha de días, cantidad de momentos escritos, idioma preferido.</li>
+    <li><strong>Datos de pago:</strong> procesados por Stripe. Bond no almacena números de tarjeta.</li>
+    <li><strong>Información técnica:</strong> tipo de dispositivo y sistema operativo, para mejorar la compatibilidad.</li>
+  </ul>
+  <p>No recopilamos tu ubicación, contactos, ni ningún otro dato del dispositivo.</p>
+
+  <h2>3. Cómo usamos tu información</h2>
+  <p>Usamos tu información exclusivamente para:</p>
+  <ul>
+    <li>Proveer y mejorar el servicio de Bond.</li>
+    <li>Mostrarte tu propio contenido y el de las personas de tu círculo.</li>
+    <li>Enviarte emails transaccionales (confirmación de cuenta, magic links, recibos).</li>
+    <li>Generar tu álbum del embarazo cuando lo solicitás.</li>
+    <li>Resolver problemas técnicos y responder consultas de soporte.</li>
+  </ul>
+  <p>Nunca usamos tu información para mostrarte publicidad. Nunca.</p>
+
+  <h2>4. Con quién compartimos tu información</h2>
+  <p>Compartimos datos mínimos con los proveedores necesarios para operar Bond:</p>
+  <ul>
+    <li><strong>Supabase:</strong> base de datos y almacenamiento de archivos (servidores en USA/EU).</li>
+    <li><strong>Stripe:</strong> procesamiento de pagos. Solo reciben datos de pago.</li>
+    <li><strong>OpenAI (Whisper):</strong> transcripción de audios al generar el álbum. Los audios se envían y procesan sin almacenarse en OpenAI.</li>
+    <li><strong>Resend:</strong> envío de emails transaccionales.</li>
+    <li><strong>Vercel:</strong> infraestructura de la aplicación.</li>
+  </ul>
+  <p>Todos nuestros proveedores están sujetos a acuerdos de confidencialidad. No vendemos ni alquilamos tus datos a terceros bajo ninguna circunstancia.</p>
+
+  <h2>5. Tu contenido es privado</h2>
+  <p>El contenido de tu diario — textos, audios, fotos y videos — es estrictamente privado:</p>
+  <ul>
+    <li>Solo vos podés verlo, salvo que invités a alguien a tu círculo.</li>
+    <li>Las personas del círculo solo ven lo que vos les permitís según el nivel de acceso que les asignaste.</li>
+    <li>El equipo de Bond no accede a tu contenido, excepto cuando sea estrictamente necesario para resolver un problema técnico que hayas reportado.</li>
+  </ul>
+
+  <h2>6. Almacenamiento y seguridad</h2>
+  <p>Tus datos se almacenan en servidores seguros con cifrado en tránsito (HTTPS) y en reposo. Usamos autenticación segura mediante Google OAuth y magic links. Los archivos multimedia se almacenan en buckets privados accesibles únicamente mediante URLs firmadas con expiración.</p>
+
+  <h2>7. Retención de datos</h2>
+  <p>Guardamos tus datos mientras tu cuenta esté activa. Si cancelás tu cuenta:</p>
+  <ul>
+    <li>Podés solicitar la eliminación completa de todos tus datos escribiéndonos a <a href="mailto:hello@joinbondapp.com">hello@joinbondapp.com</a>.</li>
+    <li>Procesamos las solicitudes de eliminación en un plazo máximo de 30 días.</li>
+    <li>Algunos datos mínimos pueden retenerse por obligaciones legales (ej. registros de facturación).</li>
+  </ul>
+
+  <h2>8. Tus derechos</h2>
+  <p>Tenés derecho a:</p>
+  <ul>
+    <li><strong>Acceder</strong> a los datos que tenemos sobre vos.</li>
+    <li><strong>Corregir</strong> datos incorrectos desde tu perfil en la app.</li>
+    <li><strong>Exportar</strong> tu contenido (disponible mediante el álbum PDF).</li>
+    <li><strong>Eliminar</strong> tu cuenta y todos tus datos.</li>
+    <li><strong>Oponerte</strong> a cualquier procesamiento de tus datos.</li>
+  </ul>
+  <p>Para ejercer cualquiera de estos derechos, escribinos a <a href="mailto:hello@joinbondapp.com">hello@joinbondapp.com</a>.</p>
+
+  <h2>9. Cookies</h2>
+  <p>Bond usa cookies técnicas mínimas necesarias para el funcionamiento de la aplicación (sesión de usuario). No usamos cookies de seguimiento ni publicidad. No compartimos datos de cookies con terceros.</p>
+
+  <h2>10. Menores de edad</h2>
+  <p>Bond está diseñado para usuarias mayores de 18 años. No recopilamos conscientemente información de menores. Si creés que un menor ha creado una cuenta, escribinos y eliminaremos la información de inmediato.</p>
+
+  <h2>11. Cambios a esta política</h2>
+  <p>Si realizamos cambios significativos a esta política, te notificaremos por email con al menos 30 días de anticipación. Los cambios menores se reflejarán en esta página con la fecha actualizada.</p>
+
+  <h2>12. Contacto</h2>
+  <p>Para cualquier consulta sobre privacidad escribinos a <a href="mailto:hello@joinbondapp.com">hello@joinbondapp.com</a>. Respondemos en menos de 48 horas hábiles.</p>
+
+</main>
+
+<footer>
+  © 2026 Bond · <a href="https://joinbondapp.com/terminos.html">Términos de uso</a> · <a href="mailto:hello@joinbondapp.com">Contacto</a>
+</footer>
+
+</body>
+</html>
