@@ -151,13 +151,10 @@ async function init() {
 }
 
 async function loginGoogle() {
-  if (codigoInvitacion) {
-    localStorage.setItem('bond_join_codigo', codigoInvitacion)
-  }
   await db.auth.signInWithOAuth({
     provider: 'google',
     options: { 
-      redirectTo: 'https://app.joinbondapp.com',
+      redirectTo: `https://app.joinbondapp.com?join=${codigoInvitacion}`,
     }
   })
 }
